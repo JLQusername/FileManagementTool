@@ -34,7 +34,10 @@ public class HelpCommand implements Runnable{
         if(lsFlag){
             System.out.println("List contents of a directory");
             System.out.println("Usage:");
-            System.out.println("  - ls <dir>\n");
+            System.out.println("  - ls      List the files and directories in the current directory");
+            System.out.println("  -f | -file        List the files in the directory");
+            System.out.println("  -d | -directory   List the directories in the directory");
+            System.out.println("  <args>    List the files and directories in the specified directory\n");
         }
         if(mkdirFlag){
             System.out.println("Create a directory");
