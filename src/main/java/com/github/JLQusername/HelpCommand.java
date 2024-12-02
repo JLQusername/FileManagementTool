@@ -37,7 +37,9 @@ public class HelpCommand implements Runnable{
             System.out.println("  - ls      List the files and directories in the current directory");
             System.out.println("  -f | -file        List the files in the directory");
             System.out.println("  -d | -directory   List the directories in the directory");
-            System.out.println("  <dir>    List the files and directories in the specified directory\n");
+            System.out.println("  -l | -long        List the files and directories in long format");
+            System.out.println("  -a | -all         List all files and directories, including hidden files and directories");
+            System.out.println("  <dir>     List the files and directories in the specified directory, no more than an argument\n");
         }
         if(mkdirFlag){
             System.out.println("Make a directory or directories in the current directory");

@@ -23,6 +23,9 @@ public class LsCommand implements Runnable{
     @Option(name = { "-l", "--long"}, description = "List the files and directories in long format")
     private boolean l = false;
 
+    @Option(name = { "-a", "--all" }, description = "List all files and directories, including hidden files and directories")
+    private boolean a = false;
+
     @Arguments(description = "List the files and directories in the directory")
     private List<String> args;
 
@@ -42,6 +45,8 @@ public class LsCommand implements Runnable{
             System.out.println("  - ls      List the files and directories in the current directory");
             System.out.println("  -f | -file        List the files in the directory");
             System.out.println("  -d | -directory   List the directories in the directory");
+            System.out.println("  -l | -long        List the files and directories in long format");
+            System.out.println("  -a | -all         List all files and directories, including hidden files and directories");
             System.out.println("  <dir>     List the files and directories in the specified directory, no more than an argument\n");
             return;
         }
@@ -90,14 +95,15 @@ public class LsCommand implements Runnable{
                     sb.append(" ").append(file.getName());
                     System.out.println(sb.toString());
                 }else{
-                    if(d == f)
+                    if(d == f && (a || !file.isHidden()))
                         System.out.print(file.getName() + "\t");
-                    else if(d && file.isDirectory())
+                    else if(d && file.isDirectory() && (!a && file.isHidden()))
                         System.out.print(file.getName() + "\t");
-                    else if(f && file.isFile())
+                    else if(f && file.isFile() && (!a && file.isHidden()))
                         System.out.print(file.getName() + "\t");
                 }
             }
+            System.out.println();
         }catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
