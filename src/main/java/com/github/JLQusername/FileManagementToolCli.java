@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 @Cli(name = "file-management-tool", description = "A simple file management tool",
-        commands = { HelpCommand.class })
+        commands = { HelpCommand.class,LsCommand.class })
 public class FileManagementToolCli {
     public static void main(String[] args) throws IOException {
         com.github.rvesse.airline.Cli<Runnable> cli = new com.github.rvesse.airline.Cli<>(FileManagementToolCli.class);
