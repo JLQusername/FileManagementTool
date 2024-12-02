@@ -6,6 +6,9 @@ import com.github.rvesse.airline.annotations.Command;
 import com.github.rvesse.airline.annotations.Option;
 
 import java.io.File;
+import java.nio.file.*;
+import java.nio.file.attribute.*;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Command(name = "ls", description = "List the files and directories in the current directory or a specified directory")
@@ -16,6 +19,9 @@ public class LsCommand implements Runnable{
 
     @Option(name = { "-f", "--file" }, description = "List the files in the directory")
     private boolean f = false;
+
+    @Option(name = { "-l", "--long"}, description = "List the files and directories in long format")
+    private boolean l = false;
 
     @Arguments(description = "List the files and directories in the directory")
     private List<String> args;
@@ -60,15 +66,53 @@ public class LsCommand implements Runnable{
         try {
             assert files != null;
             for (File file : files) {
-                if(!d && !f)
-                    System.out.print(file.getName() + "\t");
-                else if(d && file.isDirectory())
-                    System.out.print(file.getName() + "\t");
-                else if(f && file.isFile())
-                    System.out.print(file.getName() + "\t");
+                if(l) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(file.isDirectory() ? "d" : "-");
+                    sb.append(file.canRead() ? "r" : "-");
+                    sb.append(file.canWrite() ? "w" : "-");
+                    sb.append(file.canExecute() ? "x" : "-");
+                    sb.append(" " + getHardLinkCount(file.toPath()));//win不支持硬链接 默认为1
+                    try{
+                        String osName = System.getProperty("os.name");
+                        if(osName.startsWith("Linux") || osName.startsWith("Mac")){
+                            PosixFileAttributes attrs = Files.readAttributes(file.toPath(), PosixFileAttributes.class);
+                            sb.append(" " + attrs.owner().getName());
+                            sb.append(" " + attrs.group().getName());
+                        }else
+                            sb.append(" N/A  N/A");
+                    }catch (Exception e){
+                        sb.append(" N/A  N/A");
+                    }
+                    sb.append(" ").append(file.length());
+                    SimpleDateFormat sdf = new SimpleDateFormat("MMM dd HH:mm");
+                    sb.append(" " + sdf.format(file.lastModified()));
+                    sb.append(" ").append(file.getName());
+                    System.out.println(sb.toString());
+                }else{
+                    if(!d && !f)
+                        System.out.print(file.getName() + "\t");
+                    else if(d && file.isDirectory())
+                        System.out.print(file.getName() + "\t");
+                    else if(f && file.isFile())
+                        System.out.print(file.getName() + "\t");
+                }
             }
         }catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
+    }
+
+    private int getHardLinkCount(Path path){
+        try{
+            String osName = System.getProperty("os.name");
+            if(osName.startsWith("Linux") || osName.startsWith("Mac")){
+                Object linkCount = Files.getAttribute(path, "unix:nlink");
+                return (Integer) linkCount;
+            }
+        }catch (Exception e){
+            System.err.println("Error fetching hard link count for " + path + ": " + e.getMessage());
+        }
+        return 1; //win 不支持硬链接
     }
 }
