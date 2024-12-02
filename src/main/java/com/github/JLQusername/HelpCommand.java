@@ -37,12 +37,15 @@ public class HelpCommand implements Runnable{
             System.out.println("  - ls      List the files and directories in the current directory");
             System.out.println("  -f | -file        List the files in the directory");
             System.out.println("  -d | -directory   List the directories in the directory");
-            System.out.println("  <args>    List the files and directories in the specified directory\n");
+            System.out.println("  <dir>    List the files and directories in the specified directory\n");
         }
         if(mkdirFlag){
-            System.out.println("Create a directory");
+            System.out.println("Make a directory or directories in the current directory");
             System.out.println("Usage:");
-            System.out.println("  - mkdir <dir>\n");
+            System.out.println("  - mkdir    Make a directory or directories in the current directory");
+            System.out.println("  -p | -parents    Create parent directory (if it does not exist)");
+            System.out.println("  -v | -verbose    Display the directory creation proces");
+            System.out.println("  <dir1> <dir2> ...    List of directories to be create\n");
         }
         if(touchFlag){
             System.out.println("Create an empty file");

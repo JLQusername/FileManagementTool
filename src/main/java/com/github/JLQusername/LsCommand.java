@@ -11,17 +11,17 @@ import java.util.List;
 @Command(name = "ls", description = "List the files and directories in the current directory or a specified directory")
 public class LsCommand implements Runnable{
 
-    @Option(name = { "-d", "-directory" }, description = "An option that only list the directories")
-    private boolean dirFlag = false;
+    @Option(name = { "-d", "--directory" }, description = "List the directories in the directory")
+    private boolean d = false;
 
-    @Option(name = { "-f", "-file" }, description = "An option that only list the files")
-    private boolean fileFlag = false;
+    @Option(name = { "-f", "--file" }, description = "List the files in the directory")
+    private boolean f = false;
 
     @Arguments(description = "List the files and directories in the directory")
     private List<String> args;
 
-    @Option(name = { "-h", "-help" }, description = "How to use file-management-tool ls")
-    private boolean helpFlag = false;
+    @Option(name = { "-h", "--help" }, description = "How to use file-management-tool ls")
+    private boolean h = false;
 
     public static void main(String[] args) {
         SingleCommand<LsCommand> parser = SingleCommand.singleCommand(LsCommand.class);
@@ -29,15 +29,14 @@ public class LsCommand implements Runnable{
         cmd.run();
     }
 
-    @Override
     public void run() {
-        if(helpFlag){
+        if(h){
             System.out.println("List contents of a directory");
             System.out.println("Usage:");
             System.out.println("  - ls      List the files and directories in the current directory");
             System.out.println("  -f | -file        List the files in the directory");
             System.out.println("  -d | -directory   List the directories in the directory");
-            System.out.println("  <args>    List the files and directories in the specified directory\n");
+            System.out.println("  <dir>     List the files and directories in the specified directory\n");
             return;
         }
         String path;
@@ -61,11 +60,11 @@ public class LsCommand implements Runnable{
         try {
             assert files != null;
             for (File file : files) {
-                if(!dirFlag && !fileFlag)
+                if(!d && !f)
                     System.out.print(file.getName() + "\t");
-                else if(dirFlag && file.isDirectory())
+                else if(d && file.isDirectory())
                     System.out.print(file.getName() + "\t");
-                else if(fileFlag && file.isFile())
+                else if(f && file.isFile())
                     System.out.print(file.getName() + "\t");
             }
         }catch (Exception e) {
