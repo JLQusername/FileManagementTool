@@ -42,7 +42,7 @@ public class LsCommand implements Runnable{
             System.out.println("  - ls      List the files and directories in the current directory");
             System.out.println("  -f | -file        List the files in the directory");
             System.out.println("  -d | -directory   List the directories in the directory");
-            System.out.println("  <dir>     List the files and directories in the specified directory\n");
+            System.out.println("  <dir>     List the files and directories in the specified directory, no more than an argument\n");
             return;
         }
         String path;
@@ -90,7 +90,7 @@ public class LsCommand implements Runnable{
                     sb.append(" ").append(file.getName());
                     System.out.println(sb.toString());
                 }else{
-                    if(!d && !f)
+                    if(d == f)
                         System.out.print(file.getName() + "\t");
                     else if(d && file.isDirectory())
                         System.out.print(file.getName() + "\t");

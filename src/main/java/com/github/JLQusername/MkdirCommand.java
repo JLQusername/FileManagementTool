@@ -35,7 +35,7 @@ public class MkdirCommand implements Runnable{
             System.out.println("  - mkdir    Make a directory or directories in the current directory");
             System.out.println("  -p | -parents    Create parent directory (if it does not exist)");
             System.out.println("  -v | -verbose    Display the directory creation proces");
-            System.out.println("  <dir1> <dir2> ...    List of directories to be create\n");
+            System.out.println("  <dir1> <dir2> ...    List of directories to be create, an argument at least\n");
             return;
         }
         if(args == null || args.isEmpty()){

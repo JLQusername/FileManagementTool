@@ -48,9 +48,15 @@ public class HelpCommand implements Runnable{
             System.out.println("  <dir1> <dir2> ...    List of directories to be create\n");
         }
         if(touchFlag){
-            System.out.println("Create an empty file");
+            System.out.println("Create an empty file or update the modification date of an existing file");
             System.out.println("Usage:");
-            System.out.println("  - touch <file>\n");
+            System.out.println("  - touch    Create an empty file or update the modification date of an existing file");
+            System.out.println("  -a | -access-time  Update the access time only");
+            System.out.println("  -m | -modify-time  Update the modify time only");
+            System.out.println("  -c | -no-create    Do not create the file if it does not exist");
+            System.out.println("  -t | -time         Set the time of the file to the specified value");
+            System.out.println("  -r | -reference    Set the time of the file to the reference file's time");
+            System.out.println("  <arg1> <arg2> ...  Files or time, an argument at least\n");
         }
         if(rmFlag){
             System.out.println("Remove a file or directory");
