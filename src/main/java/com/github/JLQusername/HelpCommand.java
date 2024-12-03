@@ -27,6 +27,7 @@ public class HelpCommand implements Runnable{
 
     @Option(name = { "cp"}, description = "How to use cp command")
     private boolean cpFlag = false;
+
     @Option(name = { "rm_all"}, description = "How to use rm_all command")
     private boolean rmAllFlag = false;
 
@@ -60,11 +61,16 @@ public class HelpCommand implements Runnable{
             System.out.println("  -r | -reference    Set the time of the file to the reference file's time");
             System.out.println("  <arg1> <arg2> ...  Files or time, an argument at least\n");
         }
-        if(rmFlag){
-            System.out.println("Remove a file or directory");
+        if (rmFlag) {
+            System.out.println("Remove file or directory");
             System.out.println("Usage:");
-            System.out.println("  - rm <file/dir>\n");
+            System.out.println("  - rm    Remove files");
+            System.out.println("  -r      Remove a directory or directories and its or their contents recursively");
+            System.out.println("  -i      Prompt before deleting each file");
+            System.out.println("  -d      Remove empty a directory or directories");
+            System.out.println("  <arg1> <arg2> ...  List of files and directories to be remove\n");
         }
+
         if(mvFlag){
             System.out.println("Rename or move a file/directory");
             System.out.println("Usage:");

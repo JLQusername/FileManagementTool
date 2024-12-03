@@ -59,7 +59,6 @@ public class LsCommand implements Runnable{
         }else
             path = args.get(0);
         File currentDirectory = new File(path);
-        File[] files = currentDirectory.listFiles();
         if (!currentDirectory.exists()) {
             System.out.println("Error: The specified path does not exist.");
             return;
@@ -68,6 +67,7 @@ public class LsCommand implements Runnable{
             System.out.println("Error: The specified path is not a directory.");
             return;
         }
+        File[] files = currentDirectory.listFiles();
         try {
             assert files != null;
             for (File file : files) {
