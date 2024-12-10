@@ -6,8 +6,6 @@ import com.github.rvesse.airline.annotations.Command;
 import com.github.rvesse.airline.annotations.Option;
 
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
@@ -86,7 +84,7 @@ public class MvCommand implements Runnable{
         }
         String dst = args.get(args.size() - 1);
         File dstDir = new File(dst);
-        if(!dstDir.isDirectory()) {
+        if(dstDir.exists() && !dstDir.isDirectory()) {
             System.out.println("Error: The specified path " + dst + " is not a directory.");
             return;
         }
