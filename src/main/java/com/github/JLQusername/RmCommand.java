@@ -6,22 +6,21 @@ import com.github.rvesse.airline.annotations.Command;
 import com.github.rvesse.airline.annotations.Option;
 
 import java.io.File;
-import java.nio.file.Files;
 import java.util.List;
 import java.util.Scanner;
 
-@Command(name = "rm", description = "Remove file or directory")
+@Command(name = "rm", description = "Remove files or directories")
 public class RmCommand implements Runnable{
-    @Option(name = { "-h", "--help" }, description = "Recursive remove")
+    @Option(name = { "-h", "--help" }, description = "How to use file-management-tool rm")
     private boolean h = false;
 
-    @Option(name = { "-r" }, description = "Remove a directory or directories and its or their contents recursively")
+    @Option(name = { "-r", "--recursively" }, description = "Remove a directory or directories and its or their contents recursively")
     private boolean r = false;
 
-    @Option(name = { "-i" }, description = "Prompt before deleting each file")
+    @Option(name = { "-i", "--interact" }, description = "Prompt before deleting each file")
     private boolean i = false;
 
-    @Option(name = { "-d" }, description = "Remove empty a directory or directories")
+    @Option(name = { "-d", "--directory" }, description = "Remove empty a directory or directories")
     private boolean d = false;
 
     public static void main(String[] args) {
@@ -30,8 +29,8 @@ public class RmCommand implements Runnable{
         cmd.run();
     }
 
-        @Arguments(description = "List of files and directories to be remove")
-        private List<String> args;
+    @Arguments(description = "List of files and directories to be removed")
+    private List<String> args;
 
     public void run() {
         if(h) {

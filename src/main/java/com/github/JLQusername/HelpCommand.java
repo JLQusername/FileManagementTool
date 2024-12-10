@@ -10,26 +10,23 @@ public class HelpCommand implements Runnable{
         printHelp();
     }
 
-    @Option(name = { "ls"}, description = "How to use ls command")
+    @Option(name = {"ls"}, description = "How to use ls command")
     private boolean lsFlag = false;
 
-    @Option(name = { "mkdir"}, description = "How to use mkdir command")
+    @Option(name = {"mkdir"}, description = "How to use mkdir command")
     private boolean mkdirFlag = false;
 
-    @Option(name = { "touch"}, description = "How to use touch command")
+    @Option(name = {"touch"}, description = "How to use touch command")
     private boolean touchFlag = false;
 
-    @Option(name = { "rm"}, description = "How to use rm command")
+    @Option(name = {"rm"}, description = "How to use rm command")
     private boolean rmFlag = false;
 
-    @Option(name = { "mv"}, description = "How to use mv command")
+    @Option(name = {"mv"}, description = "How to use mv command")
     private boolean mvFlag = false;
 
-    @Option(name = { "cp"}, description = "How to use cp command")
+    @Option(name = {"cp"}, description = "How to use cp command")
     private boolean cpFlag = false;
-
-    @Option(name = { "rm_all"}, description = "How to use rm_all command")
-    private boolean rmAllFlag = false;
 
     private void printHelp() {
         if(lsFlag){
@@ -68,25 +65,23 @@ public class HelpCommand implements Runnable{
             System.out.println("  -r      Remove a directory or directories and its or their contents recursively");
             System.out.println("  -i      Prompt before deleting each file");
             System.out.println("  -d      Remove empty a directory or directories");
-            System.out.println("  <arg1> <arg2> ...  List of files and directories to be remove\n");
+            System.out.println("  <arg1> <arg2> ...  List of files and directories to be removed\n");
         }
-
-        if(mvFlag){
-            System.out.println("Rename or move a file/directory");
+        if (mvFlag) {
+            System.out.println("Move or Rename a file/directory");
             System.out.println("Usage:");
-            System.out.println("  - mv <src> <dst>\n");
+            System.out.println("  - mv    Move Files or Directories to another directory");
+            System.out.println("  -f      Force overwrite the destination if it exists");
+            System.out.println("  -d      If the target directory doesn't exist, create it");
+            System.out.println("  -n      Rename the file or directory");
+            System.out.println("  <arg1> <arg2> ... <dst> List of files and directories to be moved\n");
         }
         if(cpFlag){
             System.out.println("Copy a file");
             System.out.println("Usage:");
             System.out.println("  - cp <src> <dst>\n");
         }
-        if(rmAllFlag){
-            System.out.println("Remove multiple files or directories");
-            System.out.println("Usage:");
-            System.out.println("  - rm_all <path1> <path2> ... \n");
-        }
-        if(!lsFlag && !mkdirFlag && !touchFlag && !rmFlag && !mvFlag && !cpFlag && !rmAllFlag){
+        if(!lsFlag && !mkdirFlag && !touchFlag && !rmFlag && !mvFlag && !cpFlag){
             System.out.println("File Management Tool");
             System.out.println("Usage:");
             System.out.println("  - ls <dir>             List contents of a directory");
