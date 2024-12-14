@@ -14,7 +14,7 @@ public class MvCommand implements Runnable{
     @Option(name = { "-h", "--help" }, description = "How to use file-management-tool mv")
     private boolean h = false;
 
-    @Option(name = { "-f", "--force" }, description = "Force overwrite the destination if it exists")
+    @Option(name = { "-f", "--force" }, description = "Force overwrite the destination if it exists, without prompting")
     private boolean f = false;
 
     @Option(name = { "-n", "--rename" }, description = "Prompt before deleting each file")
@@ -37,7 +37,7 @@ public class MvCommand implements Runnable{
             System.out.println("Move or Rename a file/directory");
             System.out.println("Usage:");
             System.out.println("  - mv    Move Files or Directories to another directory");
-            System.out.println("  -f      Force overwrite the destination if it exists");
+            System.out.println("  -f      Force overwrite the destination if it exists, without prompting");
             System.out.println("  -d      If the target directory doesn't exist, create it");
             System.out.println("  -n      Rename the file or directory");
             System.out.println("  <arg1> <arg2> ... <dst> List of files and directories to be moved\n");
